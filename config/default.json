@@ -10,7 +10,8 @@
   "authentication": {
     "secret": "e0f460dcf5fc50aae4ab998f3c03bde1a74a576e923b1781d4bf8a81c406f6e9e22ccb672a35340e2c19d2560177eec7f407d2055bd28626fef16626442bc6f45ad5297a5e2e5dc8cb2f10baa720413ce5f1bca8f68df3ad34ce8f15313f94a9868ba9a8e2e942edaa3a44446d366dbc5b7cdbc2f8af520e8e2e290a9561a3eb9b741afe5655f3aaf21903d704d1bf22ac1b2a39b69d533963ac02b002895f3d73a276a0fb9490dfc258dfd00ab6f9571b3249da68de78b2812135ba217b3dfbec616c26d7b3bc1f00f1fe2034da9faa00d77c41728d7f8da447f8937a6745d60c7c5fffb5f8883f6b6d3eb7b35f3c7405caa0c2ea5387d4f8e026f2e2ebce1f",
     "strategies": [
-      "jwt"
+      "jwt",
+      "local"
     ],
     "path": "/authentication",
     "service": "users",
@@ -23,6 +24,12 @@
       "issuer": "feathers",
       "algorithm": "HS256",
       "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "service": "users",
+      "usernameField": "email",
+      "passwordField": "password"
     }
   }
 }
