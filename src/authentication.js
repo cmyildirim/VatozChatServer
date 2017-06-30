@@ -20,6 +20,7 @@ module.exports = function () {
         authentication.hooks.authenticate(config.strategies)
       ],
       remove: [
+        authentication.hooks.authenticate(config.strategies)
       ]
     }
   });
