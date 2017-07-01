@@ -7,6 +7,7 @@ module.exports = function (app) {
   const messages = new mongooseClient.Schema({
     text: { type: String, required: true },
     userId: {type: mongooseClient.Schema.ObjectId },
+    
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
