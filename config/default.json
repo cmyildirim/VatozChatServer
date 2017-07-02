@@ -2,6 +2,8 @@
   "host": "localhost",
   "port": 3030,
   "public": "../public/",
+  "GMAIL": "GMAIL",
+  "GMAIL_PASSWORD": "GMAIL_PASSWORD",
   "paginate": {
     "default": 10,
     "max": 50
