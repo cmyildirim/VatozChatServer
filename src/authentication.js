@@ -1,7 +1,8 @@
 const authentication = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
 const local = require('feathers-authentication-local');
-
+const oauth2 = require('feathers-authentication-oauth2');
+const FacebookStrategy = require('passport-facebook');
 
 module.exports = function () {
   const app = this;
@@ -12,13 +13,19 @@ module.exports = function () {
   app.configure(jwt());
   app.configure(local(config.local));
 
+  app.configure(oauth2(Object.assign({
+    name: 'facebook',
+    Strategy: FacebookStrategy
+  }, config.facebook)));
+
   // The `authentication` service is used to create a JWT.
   // The before `create` hook registers strategies that can be used
   // to create a new valid JWT (e.g. local or oauth2)
   app.service('authentication').hooks({
     before: {
       create: [
-        authentication.hooks.authenticate(config.strategies)
+        authentication.hooks.authenticate(config.strategies),
+        customizeJWTPayload()
       ],
       remove: [
         authentication.hooks.authenticate('jwt')
@@ -26,3 +33,14 @@ module.exports = function () {
     }
   });
 };
+
+function customizeJWTPayload() {
+  return function(hook){
+    
+    hook.params.payload = {
+      facebookId: hook.data.facebookId
+    };
+
+    return Promise.resolve(hook);
+  };
+}

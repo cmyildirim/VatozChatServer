@@ -4,7 +4,6 @@ const { restrictToOwner } = require('feathers-authentication-hooks');
 const { hashPassword } = require('feathers-authentication-local').hooks;
 const gravatar = require('../../hooks/gravatar');
 
-
 const restrict = [
   authenticate('jwt'),
   restrictToOwner({
@@ -16,11 +15,12 @@ const restrict = [
 module.exports = {
   before: {
     all: [],
-    find: [ authenticate('jwt') ],
+    //find: [ authenticate('jwt') ],
+    find: [ ],
     get: [ ...restrict ],
-    create: [ hashPassword(), gravatar()],
-    update: [ ...restrict ],
-    patch: [ ...restrict ],
+    create: [ hashPassword() ],
+    update: [ ...restrict, hashPassword() ],
+    patch: [ ...restrict, hashPassword() ],
     remove: [ ...restrict ]
   },
 

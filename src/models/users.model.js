@@ -5,11 +5,15 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const users = new mongooseClient.Schema({
-    //name: { type:String },
+    avatar: {type:String},  
+    name: {type: String, required: true},
+    image: {type: String},
     email: {type: String, unique: true},
     password: { type: String },
-    avatar: {type:String, required:true},
-
+  
+  
+    facebookId: { type: String },
+  
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
